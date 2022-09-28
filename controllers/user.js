@@ -90,12 +90,14 @@ export const updateInfo = async (req, res) => {
           ? {
               nameRestaurant: nameRestaurant,
               avatarRestaurant: avatarRestaurant,
+              loginWeb:1
             }
           : {
               avatar: avatar,
               phone: phone,
               email: email,
               name: name,
+              loginWeb:1
             },
     }
   );
