@@ -10,7 +10,7 @@ router.get("/order/:id", isAuthenticateUser, read);
 
 router.put("/order/:id", isAuthenticateUser, update);
 
-router.delete("/order/:id", isAuthenticateUser, remove);
+router.post("/order-remove", isAuthenticateUser, remove);
 
 router.param("id", isAuthenticateUser, Id);
 

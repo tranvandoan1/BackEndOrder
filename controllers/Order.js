@@ -3,7 +3,7 @@ import _ from "lodash";
 
 export const create = (req, res) => {
   let order = new Order(req.body);
-  console.log(order)
+  console.log(order);
   order.save((err, data) => {
     if (err) {
       res.status(400).json({
@@ -29,20 +29,15 @@ export const read = (req, res) => {
   return res.json(req.order);
 };
 
-export const remove = (req, res) => {
-  let order = req.order;
-  order.remove((err, order) => {
+export const remove = async (req, res) => {
+  const { id } = req.body;
+  await Order.findByIdAndRemove(id);
+
+  Order.find((err, data) => {
     if (err) {
-      return res.status(400).json({
-        error: "Không xóa được sản phẩm",
-      });
+      error: "Không tìm thấy sản phẩm";
     }
-    Order.find((err, data) => {
-      if (err) {
-        error: "Không tìm thấy sản phẩm";
-      }
-      res.json(data);
-    });
+    res.json(data);
   });
 };
 
