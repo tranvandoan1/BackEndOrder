@@ -6,7 +6,7 @@ import {
   list,
   remove,
   read,
-  update,
+  updateLogin,
   listUser,
   updateInfo,
 } from "../controllers/user";
@@ -21,7 +21,7 @@ router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
 router.get("/users", isAuthenticateUser, listUser);
 router.get("/user/:userId", isAuthenticateUser, read);
 router.post("/user-upload", isAuthenticateUser, updateInfo);
-router.post("/user-upload-login", isAuthenticateUser, update);
+router.post("/user-upload-login", isAuthenticateUser, updateLogin);
 router.get("/user", isAuthenticateUser, list);
 router.delete("/user/:userId", isAuthenticateUser, remove);
 

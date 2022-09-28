@@ -56,7 +56,7 @@ export const remove = (req, res) => {
     });
   });
 };
-export const update = async (req, res) => {
+export const updateLogin = async (req, res) => {
   const { id } = req.body;
   await User.updateMany(
     { _id: { $in: id } },
@@ -66,14 +66,14 @@ export const update = async (req, res) => {
       },
     }
   );
-  // User.find((err, data) => {
-  //   if (err) {
-  //     res.status(400).json({
-  //       err: " Không có tài khoản nào !",
-  //     });
-  //   }
-  //   res.json(data);
-  // });
+  User.find((err, data) => {
+    if (err) {
+      res.status(400).json({
+        err: " Không có tài khoản nào !",
+      });
+    }
+   return res.json(data);
+  });
 };
 export const updateInfo = async (req, res) => {
   const { _id, avatar, phone, email, name, nameRestaurant, avatarRestaurant } =
