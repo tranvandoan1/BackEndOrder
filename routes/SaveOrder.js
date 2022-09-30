@@ -10,20 +10,20 @@ import {
   removes,
 } from "../controllers/SaveOrder";
 import { changeTables } from "./../controllers/SaveOrder";
-
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
-router.post("/saveorder", create);
-router.get("/saveorder", list);
-router.get("/saveorder/:id", read);
+router.post("/saveorder", isAuthenticateUser, create);
+router.get("/saveorder", isAuthenticateUser, list);
+router.get("/saveorder/:id", isAuthenticateUser, read);
 
-router.put("/saveorder/:id", update);
-router.put("/saveorder-amount/:id", updateAmountWeight);
-router.post("/change-table", changeTables);
+router.put("/saveorder/:id", isAuthenticateUser, update);
+router.put("/saveorder-amount/:id", isAuthenticateUser, updateAmountWeight);
+router.post("/change-table", isAuthenticateUser, changeTables);
 
-router.delete("/saveorder/:id", remove);
-router.post("/delete-order", removes);
+router.delete("/saveorder/:id", isAuthenticateUser, remove);
+router.post("/delete-order", isAuthenticateUser, removes);
 
-router.param("id", saveorderId);
+router.param("id", isAuthenticateUser, saveorderId);
 
 module.exports = router;

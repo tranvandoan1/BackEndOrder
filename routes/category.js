@@ -7,17 +7,17 @@ import {
   read,
   remove,
 } from "../controllers/category";
-
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
-router.post("/categoris", create);
-router.get("/categoris", list);
-router.get("/categoris/:categoryId", read);
+router.post("/categoris", isAuthenticateUser, create);
+router.get("/categoris", isAuthenticateUser, list);
+router.get("/categoris/:categoryId", isAuthenticateUser, read);
 
-router.put("/categoris/:categoryId", update);
+router.put("/categoris/:categoryId", isAuthenticateUser, update);
 
-router.delete("/categoris/:categoryId", remove);
+router.delete("/categoris/:categoryId", isAuthenticateUser, remove);
 
-router.param("categoryId", categoryById);
+router.param("categoryId", isAuthenticateUser, categoryById);
 
 module.exports = router;
