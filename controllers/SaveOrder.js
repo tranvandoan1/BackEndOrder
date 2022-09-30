@@ -31,19 +31,13 @@ export const read = (req, res) => {
 };
 
 export const remove = async (req, res) => {
-  let saveorder = req.saveorder;
-  saveorder.remove((err, saveorder) => {
+  await Saveorder.findByIdAndRemove(req.params.id);
+
+  Saveorder.find((err, data) => {
     if (err) {
-      return res.status(400).json({
-        error: "Không xóa được sp oder",
-      });
+      error: "Không tìm thấy tầng";
     }
-    Saveorder.find((err, data) => {
-      if (err) {
-        error: "Không tìm thấy sp oder";
-      }
-      return res.json(data);
-    });
+    return res.json(data);
   });
 };
 
