@@ -10,7 +10,7 @@ import {
   removes,
 } from "../controllers/SaveOrder";
 import { changeTables } from "./../controllers/SaveOrder";
-import { isAuthenticateUser } from "./CheckAuth";
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
 router.post("/saveorder", isAuthenticateUser, create);

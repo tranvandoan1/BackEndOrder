@@ -1,6 +1,6 @@
 import express from "express";
 import { create, list, update, Id, read, remove } from "../controllers/Floors";
-import { isAuthenticateUser } from './CheckAuth';
+import { isAuthenticateUser } from '../middlewares/CheckAuth';
 const router = express.Router();
 
 router.post("/floor", isAuthenticateUser, create);

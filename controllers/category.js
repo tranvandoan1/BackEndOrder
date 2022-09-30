@@ -1,5 +1,4 @@
 import Category from "../modoles/category";
-import formidable from "formidable";
 import _ from "lodash";
 export const create = async (req, res) => {
   try {

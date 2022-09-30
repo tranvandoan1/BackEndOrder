@@ -7,7 +7,7 @@ import {
   read,
   remove,
 } from "../controllers/category";
-import { isAuthenticateUser } from "./CheckAuth";
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
 router.post("/categoris", isAuthenticateUser, create);

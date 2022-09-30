@@ -11,7 +11,7 @@ import {
   updateInfo,
 } from "../controllers/user";
 import { requireSignin, isAdmin, isAuth } from "../controllers/auth";
-import { isAuthenticateUser } from "./CheckAuth";
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 
 router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
   res.json({

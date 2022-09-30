@@ -1,6 +1,6 @@
 import express from "express";
 import { create, list, update, Id, read, remove } from "../controllers/Order";
-import { isAuthenticateUser } from "./CheckAuth";
+import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
 router.post("/order", isAuthenticateUser, create);
