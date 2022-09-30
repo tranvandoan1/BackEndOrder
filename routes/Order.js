@@ -3,15 +3,15 @@ import { create, list, update, Id, read, remove } from "../controllers/Order";
 import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
-router.post("/order", isAuthenticateUser, create);
+router.post("/order", create);
 
-router.get("/order", isAuthenticateUser, list);
-router.get("/order/:id", isAuthenticateUser, read);
+router.get("/order", list);
+router.get("/order/:id", read);
 
-router.put("/order/:id", isAuthenticateUser, update);
+router.put("/order/:id", update);
 
-router.post("/order-remove", isAuthenticateUser, remove);
+router.post("/order-remove", remove);
 
-router.param("id", isAuthenticateUser, Id);
+router.param("id", Id);
 
 module.exports = router;

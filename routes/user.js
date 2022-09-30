@@ -18,13 +18,13 @@ router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
     user: req.profile,
   });
 });
-router.get("/users", isAuthenticateUser, listUser);
-router.get("/user/:userId", isAuthenticateUser, read);
-router.post("/user-upload", isAuthenticateUser, updateInfo);
-router.post("/user-upload-login", isAuthenticateUser, updateLogin);
-router.get("/user", isAuthenticateUser, list);
-router.delete("/user/:userId", isAuthenticateUser, remove);
+router.get("/users", listUser);
+router.get("/user/:userId", read);
+router.post("/user-upload", updateInfo);
+router.post("/user-upload-login", updateLogin);
+router.get("/user", list);
+router.delete("/user/:userId", remove);
 
-router.param("userId", isAuthenticateUser, userById);
+router.param("userId", userById);
 
 module.exports = router;

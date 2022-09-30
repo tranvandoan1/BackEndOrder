@@ -3,14 +3,14 @@ import { create, list, update, Id, read, remove } from "../controllers/Floors";
 import { isAuthenticateUser } from '../middlewares/CheckAuth';
 const router = express.Router();
 
-router.post("/floor", isAuthenticateUser, create);
-router.get("/floor", isAuthenticateUser, list);
-router.get("/floor/:id", isAuthenticateUser, read);
+router.post("/floor", create);
+router.get("/floor", list);
+router.get("/floor/:id", read);
 
-router.put("/floor/:id", isAuthenticateUser, update);
+router.put("/floor/:id", update);
 
-router.delete("/floor/:id", isAuthenticateUser, remove);
+router.delete("/floor/:id", remove);
 
-router.param("id", isAuthenticateUser, Id);
+router.param("id", Id);
 
 module.exports = router;

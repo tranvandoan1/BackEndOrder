@@ -10,14 +10,14 @@ import {
 import { isAuthenticateUser } from "../middlewares/CheckAuth";
 const router = express.Router();
 
-router.post("/categoris", isAuthenticateUser, create);
-router.get("/categoris", isAuthenticateUser, list);
-router.get("/categoris/:categoryId", isAuthenticateUser, read);
+router.post("/categoris", create);
+router.get("/categoris", list);
+router.get("/categoris/:categoryId", read);
 
-router.put("/categoris/:categoryId", isAuthenticateUser, update);
+router.put("/categoris/:categoryId", update);
 
-router.delete("/categoris/:categoryId", isAuthenticateUser, remove);
+router.delete("/categoris/:categoryId", remove);
 
-router.param("categoryId", isAuthenticateUser, categoryById);
+router.param("categoryId", categoryById);
 
 module.exports = router;
