@@ -8,7 +8,7 @@ import {
   read,
   remove,
 } from "../controllers/product";
-import { isAuthenticateUser } from "../middlewares/CheckAuth";
+
 const router = express.Router();
 
 router.post("/products", create);

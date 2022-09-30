@@ -9,7 +9,7 @@ import {
   bookTable,
   moveTable,
 } from "../controllers/Table";
-import { isAuthenticateUser } from "../middlewares/CheckAuth";
+
 const router = express.Router();
 
 router.post("/table", create);
