@@ -3,13 +3,36 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
 import { readdirSync } from "fs";
+import expressValidator from "express-validator";
+import dotenv from "dotenv";
+import bodyParser from "body-parser";
 require("dotenv").config();
 const app = express();
 // database
+
+
+//Connection
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("DB Connected"))
-  .catch((error) => console.log("DB not connected ", error));
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    createIndex: true,
+  })
+  .then((err) => {
+    console.log("thành công!");
+  })
+  .catch((error) => console.log(error.message));
+
+mongoose.connection.on("error", (err) => {
+  console.log(`data connect failed, ${err.message}`);
+});
+dotenv.config();
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(expressValidator());
 
 // middleware
 app.use(morgan("dev"));
