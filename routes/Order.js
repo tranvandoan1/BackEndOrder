@@ -8,8 +8,6 @@ router.post("/order", isAuthenticateUser, create);
 router.get("/order", isAuthenticateUser, list);
 router.get("/order/:id", isAuthenticateUser, read);
 
-router.put("/order/:id", isAuthenticateUser, update);
-
 router.post("/order-remove", isAuthenticateUser, remove);
 
 router.param("id", isAuthenticateUser, Id);
