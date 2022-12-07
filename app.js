@@ -13,8 +13,18 @@ import userRoutes from "./routes/user";
 import saveorderRoutes from "./routes/SaveOrder";
 import Order from "./routes/Order";
 import Table from "./routes/Table";
-
+import socketio from "socket.io";
 const app = express();
+import http from "http";
+const server = http.createServer(app);
+const io = socketio(server);
+io.on("connected", (socket) => {
+  console.log("đã kết nối");
+  // socket.on('check',data=>{
+  //   socket.join(data)
+  //   console.log('jojo')
+  // })
+});
 dotenv.config();
 app.use(
   express.urlencoded({
@@ -55,6 +65,7 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log("Thanh cong", PORT);
 });
+
 // import express from "express";
 // import mongoose from "mongoose";
 // import morgan from "morgan";
@@ -66,7 +77,6 @@ app.listen(PORT, () => {
 // require("dotenv").config();
 // const app = express();
 // // database
-
 
 // //Connection
 // mongoose

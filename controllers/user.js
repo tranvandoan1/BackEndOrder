@@ -1,6 +1,7 @@
 import formidable from "formidable";
 import _ from "lodash";
 import User from "../modoles/user";
+import { ObjectID } from 'mongodb';
 
 export const listUser = (req, res) => {
   User.find((err, data) => {
@@ -38,22 +39,34 @@ export const read = (req, res) => {
   return res.json(req.profile);
 };
 
-export const remove = (req, res) => {
-  let user = req.profile;
-  user.remove((err, user) => {
+export const remove =async (req, res) => {
+  console.log(req.body,'adsaasd')
+  // let user = req.profile;
+  // user.remove((err, user) => {
+  //   if (err) {
+  //     return res.status(400).json({
+  //       error: "Không xóa được sản phẩm",
+  //     });
+  //   }
+  //   User.find((err, data) => {
+  //     if (err) {
+  //       res.status(400).json({
+  //         err: " Không có tài khoản nào !",
+  //       });
+  //     }
+  //     res.json(data);
+  //   });
+  // });
+  let id = req.body;
+  for (let i = 0; i < id.length; i++) {
+    id[i] = ObjectID(id[i]);
+  }
+  await User.deleteMany({ _id: { $in: id } });
+  User.find((err, data) => {
     if (err) {
-      return res.status(400).json({
-        error: "Không xóa được sản phẩm",
-      });
+      error: "Không tìm thấy sp oder";
     }
-    User.find((err, data) => {
-      if (err) {
-        res.status(400).json({
-          err: " Không có tài khoản nào !",
-        });
-      }
-      res.json(data);
-    });
+    return res.json(data);
   });
 };
 export const updateLogin = async (req, res) => {
