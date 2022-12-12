@@ -45,6 +45,6 @@
   "postinstall": "ng build --aot --target=production",
   "engines": {
     "npm": "8.19.2",
-    "node": "16.15.0"
+    "node": ">=8.0.0"
   }
 }

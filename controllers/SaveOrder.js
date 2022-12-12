@@ -97,23 +97,4 @@ export const updateAmountWeight = async (req, res) => {
     return res.json(data);
   });
 };
-export const changeTables = async (req, res) => {
-  const { id, floor_id, id_table } = req.body;
 
-  await Saveorder.updateMany(
-    { _id: { $in: id } },
-    {
-      $set: {
-        id_table: id_table,
-        floor_id: floor_id,
-      },
-    }
-  );
-
-  Saveorder.find((err, data) => {
-    if (err) {
-      error: "Không tìm thấy thông tin";
-    }
-    return res.json(data);
-  });
-};

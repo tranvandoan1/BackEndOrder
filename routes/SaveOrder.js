@@ -19,7 +19,6 @@ router.get("/saveorder/:id", isAuthenticateUser, read);
 
 router.put("/saveorder/:id", isAuthenticateUser, update);
 router.put("/saveorder-amount/:id", isAuthenticateUser, updateAmountWeight);
-router.post("/change-table", isAuthenticateUser, changeTables);
 
 router.delete("/saveorder/:id", isAuthenticateUser, remove);
 router.post("/delete-order", isAuthenticateUser, removes);
