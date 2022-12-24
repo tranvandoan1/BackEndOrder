@@ -1,5 +1,5 @@
 import formidable from "formidable";
-import _ from "lodash";
+import _, { assign } from "lodash";
 import User from "../modoles/user";
 import { ObjectID } from "mongodb";
 
@@ -13,13 +13,25 @@ export const listUser = (req, res) => {
     res.json(data);
   });
 };
-export const list = (req, res) => {
-  User.find((err, data) => {
-    if (err) {
-      error: "Không tìm thấy sản phẩm";
-    }
-    res.json(data);
+export const checkDataSignIn = async (req, res) => {
+  const user = new User(req.body);
+  const checkEmail = await User.findOne({
+    email: user.email,
   });
+  const checkPhone = await User.findOne({
+    phone: Number(user.phone),
+  });
+  if (checkEmail !== null) {
+    return res.status(400).json({
+      error: "Email đã tồn tại !",
+    });
+  } else if (checkPhone !== null) {
+    return res.status(400).json({
+      error: "Số điện thoại đã tồn tại !",
+    });
+  } else {
+    return res.json("successfully");
+  }
 };
 export const userById = (req, res, next, id) => {
   User.findById(id).exec((error, user) => {

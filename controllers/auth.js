@@ -6,21 +6,7 @@ const expressJwt = require("express-jwt");
 
 export const signup = async (req, res) => {
   const user = new User(req.body);
-  const checkEmail = await User.findOne({
-    email: user.email,
-  });
-  const checkPhone = await User.findOne({
-    phone: Number(user.phone),
-  });
-  if (checkEmail !== null) {
-    return res.status(400).json({
-      error: "Email đã tồn tại !",
-    });
-  } else if (checkPhone !== null) {
-    return res.status(400).json({
-      error: "Số điện thoại đã tồn tại !",
-    });
-  } else {
+ 
     user.save((error, user) => {
       if (error) {
         return res.status(400).json({
@@ -31,7 +17,7 @@ export const signup = async (req, res) => {
       user.hashed_password = undefined;
       res.json(user);
     });
-  }
+  // }
 };
 
 export const signin = (req, res) => {

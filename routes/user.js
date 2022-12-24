@@ -3,12 +3,12 @@ const router = express.Router();
 
 import {
   userById,
-  list,
   remove,
   read,
   updateLogin,
   listUser,
   updateInfo,
+  checkDataSignIn,
 } from "../controllers/user";
 import { requireSignin, isAdmin, isAuth } from "../controllers/auth";
 import { isAuthenticateUser } from "../middlewares/CheckAuth";
@@ -22,7 +22,7 @@ router.get("/users", isAuthenticateUser, listUser);
 router.get("/user/:userId", isAuthenticateUser, read);
 router.post("/user-upload", isAuthenticateUser, updateInfo);
 router.post("/user-upload-login", isAuthenticateUser, updateLogin);
-router.get("/user", isAuthenticateUser, list);
+router.post("/user-check-login", checkDataSignIn);
 router.post("/userRemove", remove);
 
 router.param("userId", isAuthenticateUser, userById);
