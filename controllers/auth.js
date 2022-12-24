@@ -4,18 +4,34 @@ import dotenv from "dotenv";
 dotenv.config();
 const expressJwt = require("express-jwt");
 
-export const signup = (req, res) => {
+export const signup = async (req, res) => {
   const user = new User(req.body);
-  user.save((error, user) => {
-    if (error) {
-      return res.status(400).json({
-        error: "Đăng ký thất bại",
-      });
-    }
-    user.salt = undefined;
-    user.hashed_password = undefined;
-    res.json(user);
+  const checkEmail = await User.findOne({
+    email: user.email,
   });
+  const checkPhone = await User.findOne({
+    phone: Number(user.phone),
+  });
+  if (checkEmail !== null) {
+    return res.status(400).json({
+      error: "Email đã tồn tại !",
+    });
+  } else if (checkPhone !== null) {
+    return res.status(400).json({
+      error: "Số điện thoại đã tồn tại !",
+    });
+  } else {
+    user.save((error, user) => {
+      if (error) {
+        return res.status(400).json({
+          error: "Đăng ký thất bại",
+        });
+      }
+      user.salt = undefined;
+      user.hashed_password = undefined;
+      res.json(user);
+    });
+  }
 };
 
 export const signin = (req, res) => {
@@ -29,7 +45,7 @@ export const signin = (req, res) => {
 
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "Email và Password của bạn không đúng",
+        error: "Password của bạn không đúng",
       });
     }
 
@@ -43,8 +59,7 @@ export const signin = (req, res) => {
       email,
       role,
       phone,
-      loginWeb,
-      loginApp,
+      accountType,
       avatarRestaurant,
       nameRestaurant,
     } = user;
@@ -52,13 +67,12 @@ export const signin = (req, res) => {
       token,
       user: {
         _id,
+        name,
         avatar,
         email,
-        name,
         role,
         phone,
-        loginWeb,
-        loginApp,
+        accountType,
         avatarRestaurant,
         nameRestaurant,
       },
@@ -76,7 +90,6 @@ export const requireSignin = expressJwt({
   algorithms: ["HS256"], // added later
   userProperty: "auth",
 });
-console.log(requireSignin);
 export const isAuth = (req, res, next) => {
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
   console.log(process.env.JWT_SECRET);

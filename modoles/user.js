@@ -10,10 +10,10 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
     },
-    loginWeb: {
+    accountType: {
       type: Number,
     },
-    loginApp: {
+    count: {
       type: Number,
     },
     hashed_password: {
@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema(
     avatarRestaurant: {
       type: String,
     },
-    nameRestaurant:{
-      type:String
+    nameRestaurant: {
+      type: String,
     },
     salt: {
       type: String,

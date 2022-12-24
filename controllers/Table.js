@@ -136,16 +136,6 @@ export const moveTable = async (req, res) => {
     amountEnd,
     nameUserEnd,
   } = req.body;
-  console.log(
-    idStart,
-    idEnd,
-    timeBookTableStart,
-    amountStart,
-    nameUserStart,
-    timeBookTableEnd,
-    amountEnd,
-    nameUserEnd
-  );
   await Table.updateMany(
     { _id: idEnd },
     {

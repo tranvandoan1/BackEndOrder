@@ -1,7 +1,7 @@
 import formidable from "formidable";
 import _ from "lodash";
 import User from "../modoles/user";
-import { ObjectID } from 'mongodb';
+import { ObjectID } from "mongodb";
 
 export const listUser = (req, res) => {
   User.find((err, data) => {
@@ -39,8 +39,8 @@ export const read = (req, res) => {
   return res.json(req.profile);
 };
 
-export const remove =async (req, res) => {
-  console.log(req.body,'adsaasd')
+export const remove = async (req, res) => {
+  console.log(req.body, "adsaasd");
   // let user = req.profile;
   // user.remove((err, user) => {
   //   if (err) {
@@ -75,7 +75,7 @@ export const updateLogin = async (req, res) => {
     { _id: { $in: id } },
     {
       $set: {
-        loginWeb: 1,
+        count: 1,
       },
     }
   );
@@ -85,7 +85,7 @@ export const updateLogin = async (req, res) => {
         err: " Không có tài khoản nào !",
       });
     }
-   return res.json(data);
+    return res.json(data);
   });
 };
 export const updateInfo = async (req, res) => {
@@ -103,14 +103,14 @@ export const updateInfo = async (req, res) => {
           ? {
               nameRestaurant: nameRestaurant,
               avatarRestaurant: avatarRestaurant,
-              loginWeb:1
+              count: 1,
             }
           : {
               avatar: avatar,
               phone: phone,
               email: email,
               name: name,
-              loginWeb:1
+              count: 1,
             },
     }
   );
