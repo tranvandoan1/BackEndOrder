@@ -43,6 +43,7 @@ export const remove = async (req, res) => {
 };
 
 export const list = (req, res) => {
+  console.log('vào nhé')
   Table.find((err, data) => {
     if (err) {
       error: "Không tìm thấy thông tin";
@@ -68,7 +69,7 @@ export const update = async (req, res) => {
   });
 };
 export const addOrderTable = async (req, res) => {
-  console.log(req.body, "e3wqds");
+
   const orders = await Table.findOne({
     _id: req.body.id_table,
   });
@@ -78,22 +79,18 @@ export const addOrderTable = async (req, res) => {
       $set:
         orders.orders == null
           ? {
-              orders:
-                orders.orders == null
-                  ? JSON.stringify([req.body.data])
-                  : req.body.data.length <= 0 || req.body.data == null
-                  ? null
-                  : JSON.stringify(req.body.data),
-              time_start: req.body.time_start,
-            }
+            orders: Array.isArray(req.body.data) == false ? JSON.stringify([req.body.data])
+              : req.body.data.length <= 0 || req.body.data == null
+                ? null
+                : JSON.stringify(req.body.data),
+            time_start: req.body.time_start,
+          }
           : {
-              orders:
-                orders.orders == null
-                  ? JSON.stringify([req.body.data])
-                  : req.body.data.length <= 0 || req.body.data == null
-                  ? null
-                  : JSON.stringify(req.body.data),
-            },
+            orders: Array.isArray(req.body.data) == false ? JSON.stringify([req.body.data])
+              : req.body.data.length <= 0 || req.body.data == null
+                ? null
+                : JSON.stringify(req.body.data),
+          },
     }
   );
   Table.find((err, data) => {
