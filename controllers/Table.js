@@ -122,45 +122,7 @@ export const bookTable = async (req, res) => {
   });
 };
 
-export const moveTable = async (req, res) => {
-  const {
-    idStart,
-    idEnd,
-    timeBookTableStart,
-    amountStart,
-    nameUserStart,
-    timeBookTableEnd,
-    amountEnd,
-    nameUserEnd,
-  } = req.body;
-  await Table.updateMany(
-    { _id: idEnd },
-    {
-      $set: {
-        amount: amountEnd,
-        timeBookTable: timeBookTableEnd,
-        nameUser: nameUserEnd,
-      },
-    }
-  );
-  await Table.updateMany(
-    { _id: idStart },
-    {
-      $set: {
-        amount: amountStart,
-        timeBookTable: timeBookTableStart,
-        nameUser: nameUserStart,
-      },
-    }
-  );
 
-  Table.find((err, data) => {
-    if (err) {
-      error: "Không tìm thấy bàn";
-    }
-    return res.json(data);
-  });
-};
 export const removeOrderTable = async (req, res) => {
   const { id } = req.body;
   await Table.updateMany(
@@ -172,6 +134,7 @@ export const removeOrderTable = async (req, res) => {
         nameUser: "",
         phone: null,
         orders: null,
+        time_start: null
       },
     }
   );
@@ -185,7 +148,6 @@ export const removeOrderTable = async (req, res) => {
 };
 export const changeTables = async (req, res) => {
   const { table1, table2 } = req.body;
-  console.log(table1, table2);
   await Table.updateMany(
     { _id: table1._id },
     {
@@ -195,10 +157,11 @@ export const changeTables = async (req, res) => {
         nameUser: "",
         phone: null,
         orders: null,
+        time_start: null
+
       },
     }
   );
-  console.log("213123 xong roofi");
   await Table.updateMany(
     { _id: table2 },
     {
@@ -208,10 +171,10 @@ export const changeTables = async (req, res) => {
         nameUser: table1.nameUser,
         phone: table1.phone,
         orders: JSON.stringify(table1.orders),
+        time_start: table1.time_start
       },
     }
   );
-  console.log("xong roofi");
   Table.find((err, data) => {
     if (err) {
       error: "Không tìm thấy thông tin";

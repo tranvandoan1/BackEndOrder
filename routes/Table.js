@@ -22,7 +22,6 @@ router.get("/table/:id", isAuthenticateUser, read);
 router.put("/table/:id", isAuthenticateUser, update);
 
 router.post("/table/book-table", isAuthenticateUser, bookTable);
-router.post("/table/move-table", isAuthenticateUser, moveTable);
 router.post("/table/add-orders-table", isAuthenticateUser, addOrderTable);
 router.post("/table/remove-orders-table", isAuthenticateUser, removeOrderTable);
 router.post("/change-table", isAuthenticateUser, changeTables);
