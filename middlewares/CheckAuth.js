@@ -20,7 +20,7 @@ export const isAuthenticateUser = async (req, res, next) => {
   } catch (error) {
     res.json({
       message: error,
-      ko: "đáiáidá",
+      ko: "tèo",
     });
   }
 };
