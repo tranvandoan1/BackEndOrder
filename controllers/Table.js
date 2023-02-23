@@ -147,9 +147,9 @@ export const removeOrderTable = async (req, res) => {
   });
 };
 export const changeTables = async (req, res) => {
-  const { table1, table2 } = req.body;
+  const { table_moved, table_received } = req.body;
   await Table.updateMany(
-    { _id: table1._id },
+    { _id: table_moved._id },
     {
       $set: {
         amount: "",
@@ -163,15 +163,15 @@ export const changeTables = async (req, res) => {
     }
   );
   await Table.updateMany(
-    { _id: table2 },
+    { _id: table_received },
     {
       $set: {
-        amount: table1.amount,
-        timeBookTable: String(table1.timeBookTable),
-        nameUser: table1.nameUser,
-        phone: table1.phone,
-        orders: JSON.stringify(table1.orders),
-        time_start: table1.time_start
+        amount: table_moved.amount,
+        timeBookTable: String(table_moved.timeBookTable),
+        nameUser: table_moved.nameUser,
+        phone: table_moved.phone,
+        orders: JSON.stringify(table_moved.orders),
+        time_start: table_moved.time_start
       },
     }
   );
