@@ -56,7 +56,7 @@ const socketIo = require("socket.io")(server, {
 
 
 socketIo.on("connection", (socket) => {
-  socket.on("sendDataClient-table", function (data) {
+  socket.on("sendDataClient", function (data) {
     console.log(data, '23ewrfd')
     socketIo.emit("sendDataServer-table", { data: data });
   })
