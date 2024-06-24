@@ -30,6 +30,9 @@ const Table = new mongoose.Schema(
     time_start: {
       type: String,
     },
+    version:{
+      type: String,
+    }
     // {
     //   // id_user: {
     //   //   type: ObjectId,

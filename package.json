@@ -36,7 +36,7 @@
     "read-excel-file": "^5.2.28",
     "redis-server": "^1.2.2",
     "service": "^0.1.4",
-    "socket.io": "^4.5.3",
+    "socket.io": "^4.7.5",
     "status": "^0.0.13",
     "sudo": "^1.0.3",
     "uuid": "^8.3.2",
